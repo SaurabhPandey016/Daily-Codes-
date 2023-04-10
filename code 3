@@ -1,0 +1,48 @@
+class Solution {
+public:
+
+    bool check(vector<int> &weights, int mid, int days)
+    {
+        int dayNeed = 1;
+        int maxLoad = 0;
+
+        for(auto i : weights)
+        {
+            maxLoad += i;
+            if(maxLoad > mid)
+            {
+                dayNeed ++;
+                maxLoad = i;
+            }
+        }
+
+        return dayNeed <= days;
+    }
+
+    int shipWithinDays(vector<int>& weights, int days) {
+        
+        if(days > weights.size()) return -1;
+
+        int maxi = -1, sum = 0, ans = -1;
+        for(auto i : weights)
+        {
+            maxi = max(maxi, i);
+            sum += i;
+        }
+
+        int s = maxi, e = sum;
+        while(s <= e)
+        {
+            int mid = s + (e - s)/2;
+            if(check(weights, mid, days))
+            {
+                ans = mid;
+                e = mid - 1;
+            }
+            else s = mid + 1;
+        }
+
+        return ans;
+        
+    }
+};
