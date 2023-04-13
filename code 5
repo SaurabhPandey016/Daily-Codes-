@@ -1,0 +1,50 @@
+class Solution {
+public:
+
+    bool check(vector<int> &bloomDay, int mid, int m, int k)
+    {
+        int adj = 0, bouq = 0;
+        for(auto i : bloomDay)
+        {
+            if(i <= mid)
+            {
+                adj++;
+                if(adj == k)
+                {
+                    bouq++;
+                    adj = 0;
+                }
+            }
+            else adj = 0;
+        }
+
+        if(bouq < m) return false;
+        else return true;
+    }
+
+    int minDays(vector<int>& bloomDay, int m, int k) {
+
+        int maxi = INT_MIN;
+        for(auto i : bloomDay)
+        {
+          maxi = max(maxi, i);
+        }
+
+        int s = 0, e = maxi, ans = 0;
+        while(s <= e)
+        {
+            if((1ll *m * k) > bloomDay.size()) return -1;
+
+            int mid = s + (e - s)/2;
+            if(check(bloomDay, mid, m, k))
+            {
+                ans = mid;
+                e = mid - 1;
+            }
+            else s = mid + 1;
+        }
+
+        return ans;
+
+    }
+};
