@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	
+	int t;
+	cin >> t;
+	
+	while(t--)
+	{
+	    int n;
+	    cin >> n;
+	    
+	    string sttr;
+	    cin >> sttr;
+	    
+	    int zeroAnda = 0, oneAnda = 0;
+	    for(int i = 0; i<n; i++)
+	    {
+	        if(sttr[i] == '1') oneAnda++;
+	        else zeroAnda++;
+	    }
+	    
+	    int Jodi = min(zeroAnda, oneAnda);
+	    if(Jodi %2 == 0)
+	    {
+	        cout << "Ramos" << endl;
+	    }
+	    else cout << "Zlatan" << endl;
+	}
+	
+	return 0;
+}
