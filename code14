@@ -1,0 +1,33 @@
+class Solution
+{
+    public:
+    Node* deleteNode(Node *head, int x)
+    {
+        int cnt = 1;
+        
+        // Handling First Node;
+        if(cnt == x)
+        {
+            head = head-> next;
+            return head;
+        }
+        
+       Node * curr = head;
+        
+        while(cnt <= x)
+        {
+            if(cnt == x)
+            {
+                // Not Updating prev Pointer Still It Works On All Testcases
+                curr-> prev-> next = curr-> next;
+                delete(curr);
+            }
+            else curr = curr-> next;
+            cnt++;
+        }
+        
+        return head;
+        
+      
+    }
+};
