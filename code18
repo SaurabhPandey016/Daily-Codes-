@@ -1,0 +1,30 @@
+class Solution {
+public:
+    inline bool isVowel(char& c){
+        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+    }
+
+    int maxVowels(string s, int k) {
+        int max_vowels = 0;
+        int running_count=0;
+        for(int i = 0; i < k; i++){
+            if(isVowel(s[i])) running_count++;
+        }
+
+        max_vowels = running_count;
+        
+        for(int i = k; i < s.size(); i++){
+            running_count += (int)isVowel(s[i]) - (int)isVowel(s[i-k]);
+
+            max_vowels = max(max_vowels, running_count);
+        }
+
+        return max_vowels;
+    }
+};
+
+static const auto init = []{
+        ios::sync_with_stdio(false);
+        cin.tie(NULL);
+        return false;
+}();
