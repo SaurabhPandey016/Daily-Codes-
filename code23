@@ -1,0 +1,27 @@
+int findFirstRepeatingDigit(string digitPattern) {
+
+    // Write your code here.
+
+    int store[10] ={0};
+
+    for(int i=0;i<digitPattern.length();i++){
+
+        int digit = int(digitPattern[i]-'0');
+
+        if(store[digit]==1){
+
+            return digit;
+
+        }
+
+        else{
+
+            store[digit]=1;
+
+        }
+
+    }
+
+    return -1;
+
+}
