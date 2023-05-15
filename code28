@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        long long int n, f, l, c, q, z = 0;
+        string s;
+        cin >> s;
+        vector<int> v{0};
+        for (int i = 0; i < s.size(); i++)
+        {
+            if (s[i] == '.')
+                z++;
+            if (s[i] == '#')
+            {
+                 if(z > *max_element(v.begin(), v.end()))
+                 v.push_back(z);
+                 z=0;
+            }
+            
+            
+                
+              
+            
+        }
+        cout << v.size() - 1 << endl;
+    }
+}
