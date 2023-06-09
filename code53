@@ -1,0 +1,17 @@
+class Solution {
+public:
+    typedef vector<char>::size_type vSize;
+    char nextGreatestLetter(vector<char>& letters, char target) {
+        if(target >= letters.back())
+            return letters[0];
+        vSize p(0),q(letters.size() - 1);
+        while(p < q){
+            vSize mid = (p + q) / 2;
+            if(letters[mid] > target)
+                q = mid;
+            else
+                p = mid + 1;
+        }
+        return letters[p];
+    }
+};
