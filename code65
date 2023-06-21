@@ -1,0 +1,32 @@
+class Solution {
+ public:
+  Solution() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+  }
+  long mod = 1e9 + 7;
+  long long minCost(vector<int>& nums, vector<int>& cost) {
+    vector<pair<int, int>> increase;
+    int n = nums.size();
+    increase.reserve(n);
+    long diff = 0;
+    for (int i = 0; i < n; ++i) {
+      increase.emplace_back(nums[i], cost[i]);
+      diff += cost[i];
+    }
+    sort(increase.begin(), increase.end());
+    int l = -1;
+    while (diff > 0) {
+      ++l;
+      diff -= 2 * increase[l].second;
+    }
+    int v = increase[l].first;
+    long ret = 0;
+    for (int i = 0; i < n; ++i) {
+      ret += (long)abs(v - nums[i]) * cost[i];
+    }
+
+    return ret;
+  }
+};
