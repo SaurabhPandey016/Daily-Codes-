@@ -1,0 +1,15 @@
+bool reachDestination(int sx, int sy, int dx, int dy) {
+    // Write your code here
+        if (sx==dx and sy==dy){
+            return true;
+        }
+        if (sx>dx or sy>dy){
+            return false;
+        }
+        if(dx>dy){
+            return reachDestination(sx,sy,dx-dy,dy);
+        }
+        else{
+            return reachDestination(sx,sy,dx,dy-dx);
+        }
+}
