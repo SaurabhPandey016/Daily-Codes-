@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main() 
+{
+	ll t,n,i,j,k;
+	cin >> t;
+	while(t--)
+	{
+	    cin >> n;
+	    vector<ll>v(n,0ll);
+	    for(i=0;i<n;i++)
+	    {
+	        cin >> v[i];
+	    }
+	    ll s=accumulate(v.begin(),v.end(),0ll);
+	    i=0ll;
+	    while(s>=((i*(i+1))/2ll))
+	        ++i;
+	    cout << i-1ll << "\n";
+	}
+	return 0;
+}
