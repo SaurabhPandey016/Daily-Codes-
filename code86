@@ -1,0 +1,29 @@
+    bool isFrequencyUnique(int siz, int arr[])
+    {
+        unordered_map<int,int>mp;
+        
+        for(int i=0;i<siz;i++)
+        {
+            mp[arr[i]]++;
+        }
+        
+        vector<int>vec;
+        unordered_set<int>st;
+        
+        for(auto it=mp.begin();it != mp.end();it++)
+        {
+            vec.push_back(it -> second);
+            st.insert(it -> second);
+        }
+        
+        int n = vec.size();
+        int m = st.size();
+        
+        if(n == m)
+        {
+            return true;
+        }
+    
+        return false;
+        
+    }
