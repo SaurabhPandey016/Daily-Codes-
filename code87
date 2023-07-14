@@ -1,0 +1,47 @@
+code#include <bits/stdc++.h> 
+
+vector<int> findNonRepeating(vector<int> nums){
+
+     vector<int>v;
+
+        int n=nums.size();
+
+        int XOR=nums[0];
+
+        for(int i=1; i<n; i++){
+
+            XOR=XOR^nums[i];
+
+        }
+
+        int right_bit=XOR & ~(XOR-1);
+
+        int x,y;
+
+        x=0,y=0;
+
+        for(int i=0; i<n; i++){
+
+            if(nums[i]&right_bit){
+
+                x=x^nums[i];
+
+            }
+
+            else{
+
+                y=y^nums[i];
+
+            }
+
+        }
+
+        v.push_back(x);
+
+        v.push_back(y);
+
+        sort(v.begin(),v.end());
+
+        return v;
+
+}
