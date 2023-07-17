@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int t;
+	cin>>t;
+	while(t--){
+	  int N,K,L,max_speed=0;
+	  cin>>N>>K>>L;
+	    for(int i=0;i<N-1;i++)
+	    {
+	        int a;
+	        cin>>a;
+	        if(a>max_speed)
+	        max_speed=a;
+	    }
+	    
+	    int speed;
+	    cin>>speed;
+	    if(speed>max_speed)
+	    {
+	        cout<<"Yes"<<endl;
+	        continue;
+	    }
+	    if(K<0){
+	        cout<<"No"<<endl;
+	        continue;
+	    }
+	   
+	   int max_add=K*(L-1);
+	   if(max_add+speed>max_speed){
+	       cout<<"Yes"<<endl;
+	   }else
+	   {
+	       cout<<"No"<<endl;
+	   }
+	}
+	return 0;
+}
