@@ -1,0 +1,79 @@
+
+class Solution {
+public:
+
+    bool isSafe(int row, int col, vector<string> &board, int n)
+    {
+        // Store Original State Of Row And Col
+        int originR = row;
+        int originC = col;
+
+        // Checking For Left 
+        while(col >= 0)
+        {
+            if(board[row][col] == 'Q') return false;
+            col--;
+        }
+
+        row = originR;
+        col = originC;
+        // Checking For UpperLeft;
+        while(row >= 0 && col >= 0)
+        {
+            if(board[row][col] == 'Q') return false;
+            col--, row--;
+        }
+
+        row = originR;
+        col = originC;
+
+        // Checking for Lower Left
+        while(row < n && col >= 0)
+        {
+            if(board[row][col] == 'Q') return false;
+            row++, col--;
+        }
+
+        return true;
+    }
+
+    void solve(int col, vector<string> &board, vector<vector<string>> & ans, int n)
+    {
+        //Base Case
+        if(col == n)
+        {
+            ans.push_back(board);
+            return;
+        }
+
+        for(int row = 0; row<n; row++)
+        {
+            // If Possible to Place a Queen Then
+            if(isSafe(row, col, board, n))
+            {
+                board[row][col] = 'Q';
+                solve(col+1, board, ans, n);
+
+                // BackTrack and Remove 'Q
+                board[row][col] = '.';
+            }
+        }
+    }
+
+    vector<vector<string>> solveNQueens(int n) {
+        
+        // vector<vector to Store N Combinations of Queens
+        vector<vector<string>> ans;
+        vector<string> board(n);
+        string s(n, '.');
+        
+        // Updatig Every index Of Board With Dots
+        for(int i = 0; i<n; i++)
+        {
+            board[i] = s;
+        }
+
+        solve(0, board, ans, n);
+        return ans;
+    }
+};
