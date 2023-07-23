@@ -1,0 +1,43 @@
+#include <bits/stdc++.h> 
+
+long long findPairY(long long X)
+
+{
+
+    long long l = log2(X);
+
+    long long r = 0;
+
+    long long OR = 0;
+
+    while(l>r){
+
+        long long lb = ((X>>l)&1);
+
+        long long rb = ((X>>r)&1);
+
+        if(lb!=rb){
+
+            if(lb){
+
+               OR |= (1LL<<r);
+
+            }
+
+            else{
+
+                OR |= (1LL<<l);
+
+            }
+
+        } 
+
+        l--;
+
+        r++;
+
+    }
+
+    return OR;
+
+}
