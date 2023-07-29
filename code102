@@ -1,0 +1,7 @@
+bool checkBits(unsigned int n) {
+    // Write your code here.
+    unsigned int mask = n ^ (n >> 1);
+    mask ^= mask >> 1;
+    
+    return !(mask & (mask - 1));
+}
