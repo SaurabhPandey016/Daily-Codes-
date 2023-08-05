@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+using namespace std;
+ /*
+               _,--"^^"-.,_
+         _.-"~^`~-.    .-~`^~"-._
+     ,="`"-._     .----.     _.-"`"=,
+    ;_       "-. (0 )( 0) .-"       _;
+   .' `~"=,_    '.\ \/ /.'    _,="~` `.
+   ;_       "-. _.-)  (-._ .-"       _;
+   : ^~"-.,___.'  (    )  `.___,.-"~^ ;
+   :        _:     `--'     :_        :
+    '._,-~"` :':          :': `"~-,_.'
+       '.,_.-`.            .'`-._,.'
+          :__.-`-.______.-'`-.__;
+                 //    \\
+               (((~    ~)))
+*/
+
+void solve(){
+
+int n;
+cin>>n;
+vector<bool> visRow(n,false),visCol(n,false);
+for(int i=0;i<n;i++){
+    for(int j=0;j<n;j++){
+        int tempo;
+        cin>>tempo;
+
+if(tempo==0){
+    visRow[i]=true;
+    visCol[j]=true;
+}
+
+    }
+
+}
+
+for(int i=0;i<n;i++){
+    if(!(visRow[i] && visCol[i])){
+        cout<<"NO\n";
+        return;
+    }
+}
+cout<<"YES\n";
+}
+ 
+int main()
+{
+ ios_base::sync_with_stdio(false);
+ cin.tie(NULL);
+ cout.tie(NULL);
+ 
+int t;
+cin>>t;
+while(t--){
+solve();
+}
+    return 0;
+} 
