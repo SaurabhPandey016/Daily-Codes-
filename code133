@@ -1,0 +1,57 @@
+class MyStack {
+public:
+    
+    // Initialization of 2 Queue's
+    queue<int> q1;
+
+    // Useless filhaal Why? Donn Know Yet But Will know
+    MyStack() {
+        
+
+    }
+    // Just Implement This
+    void push(int x) {
+        
+        // Step 1 Push Whatevr They Give You 
+        q1.push(x); 
+        
+        // Than whateva the size - 1 Do this;
+        // Pop() Front Element Then Push That Element Again
+        for(int i = 0; i<q1.size() - 1; i++)
+        {
+            int top = q1.front();
+            q1.pop();
+
+            // Push Again;
+            q1.push(top);
+        }
+    }
+    // same
+    int pop() {
+        
+        // Store Current Element;
+        int popped = q1.front();
+        q1.pop();
+
+        return popped;
+    }
+    // same
+    int top() {
+        
+        return q1.front();
+    }
+    // same
+    bool empty() {
+        
+        return q1.empty();
+    }
+};
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack* obj = new MyStack();
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ * int param_3 = obj->top();
+ * bool param_4 = obj->empty();
+ */
