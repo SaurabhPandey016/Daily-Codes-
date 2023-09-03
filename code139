@@ -1,0 +1,52 @@
+ void swaps(Node*&root){
+         if(root->left==NULL&&root->right==NULL) return ;
+         
+         
+         
+          swap(root->left,root->right);
+         
+         if(root->left)
+         swaps(root->left);
+         if(root->right)
+         swaps(root->right);
+         
+     }
+     bool comp(Node *root1,Node *root2){
+         if(root1==NULL&&root2==NULL) return true;
+         
+         if(root1==NULL||root2==NULL) return false;
+         
+         if(root1->data!=root2->data) return false;
+         
+         comp(root1->left,root2->left)&&comp(root1->right,root2->right);
+         
+         
+         
+     }
+     bool comp1(Node *root1,Node *root2){
+         if(root1==NULL&&root2==NULL) return true;
+         
+         if(root1==NULL||root2==NULL) return false;
+         
+         if(root1->data!=root2->data) return false;
+         
+         comp1(root1->left,root2->left)&&comp1(root1->right,root2->right);
+         
+         
+         
+     }
+     
+     
+    bool isIsomorphic(Node *root1,Node *root2)
+    {
+        
+       
+     bool l1=comp1(root1,root2);
+     
+       swaps(root1);
+     bool l2 =comp(root1,root2);
+       
+       return (l1 or l2);
+        
+        
+    }
