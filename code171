@@ -1,0 +1,105 @@
+#include <bits/stdc++.h> 
+
+int GCD(int a,int b) {
+
+    if(b==0) return a;
+
+    else {
+
+        return GCD(b,a%b);
+
+    }
+
+}
+
+int minSubarrays(vector<int>arr) {
+
+   int right = arr.size() - 1;
+
+ 
+
+    // Left pointer
+
+    int left = 0;
+
+ 
+
+    // Count of subarrays
+
+    int subarrays = 0;
+
+ 
+
+    while (right >= 0) {
+
+ 
+
+        for (left = 0; left <= right;
+
+             left += 1) {
+
+ 
+
+            // Find GCD(left, right)
+
+            if (__gcd(arr[left],
+
+                      arr[right])
+
+                > 1) {
+
+ 
+
+                // Found a valid large
+
+                // subarray between
+
+                // arr[left, right]
+
+                subarrays += 1;
+
+                right = left - 1;
+
+                break;
+
+            }
+
+ 
+
+            // Searched the arr[0..right]
+
+            // and found no subarray
+
+            // having size >1 and having
+
+            // gcd(left, right) > 1
+
+            if (left == right
+
+                && __gcd(arr[left],
+
+                         arr[right])
+
+                       == 1) {
+
+                return -1;
+
+            }
+
+        }
+
+    }
+
+    if(subarrays==0) {
+
+        return -1;
+
+    }
+
+    return subarrays;
+
+}
+
+ 
+
+ 
