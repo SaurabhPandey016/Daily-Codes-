@@ -1,0 +1,32 @@
+void rearrange(struct Node *odd)
+    {
+        //add code here
+        Node *end=NULL;
+        int n=0;
+        Node *curr=odd;
+        while(curr){
+            if(curr->next == NULL){
+                end=curr;
+            }
+            n++;
+            curr=curr->next;
+        }
+        curr=odd;
+        
+        if(n<3) return;
+        int i=1;
+        
+        while(i<n && i<n-1){
+            Node *temp = curr->next;
+            curr->next = curr->next->next;
+            curr = curr->next;
+        
+            Node *temp2 = end->next;
+            end->next = temp;
+            temp->next = temp2;
+        
+            i += 2;
+        }
+
+        return;
+    }
