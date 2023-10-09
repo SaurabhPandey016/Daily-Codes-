@@ -1,0 +1,64 @@
+using lli = long long int;
+using ll = long long;
+lli binary_exponentiation(lli a, lli b, lli mod)
+{
+    lli ans = 1;
+    // if(b%2==1) this means number b is odd.
+    while (b)
+    {
+        if (b & 1)
+        {
+            ans = (ans * a) % mod;
+        }
+        a = (a * a) % mod;
+        b = (b >> 1);
+    }
+
+    return ans;
+}
+
+class Triplet
+{
+public:
+    int x, y, gcd;
+};
+
+Triplet extendedEuclid(int a, int b)
+{
+    // Base Case
+    if (b == 0)
+    {
+        Triplet ans;
+        ans.gcd = a;
+        ans.x = 1;
+        ans.y = 0;
+        return ans;
+    }
+    // Extended Euclid Algorithms
+    Triplet smallAns = extendedEuclid(b, a % b);
+    Triplet ans;
+    ans.gcd = smallAns.gcd;
+    ans.x = smallAns.y;
+    ans.y = smallAns.x - (a / b) * smallAns.y;
+    return ans;
+}
+
+int mmInverse(int a, int m)
+{
+    Triplet ans = extendedEuclid(a, m);
+    if (ans.x < 0)
+    {
+        ans.x += m;
+    }
+
+    return ans.x;
+}
+
+int solve(int a, int b, int c, int m)
+{
+    ll ans = binary_exponentiation(a, b, m);
+    ll inverse = mmInverse(c, m);
+    // cout << ans << " " << inverse << endl;
+    ans = ((ans % m) * (inverse % m)) % m;
+    return ans;
+}
