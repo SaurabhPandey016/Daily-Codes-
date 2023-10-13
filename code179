@@ -1,0 +1,21 @@
+  int floor(Node* root, int x) { 
+    Node *temp=root;
+    int ans=-1;
+    while(temp!=NULL){
+      
+       if(x<temp->data){
+           temp=temp->left;
+           
+       }
+       else if(x>temp->data){
+           ans=temp->data;
+           temp=temp->right;
+    
+       }
+       else 
+       return x;
+    }
+    
+    return ans;
+
+}   
