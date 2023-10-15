@@ -1,0 +1,26 @@
+ void inorder(Node *root, vector<int> &vec){
+        if(!root)return;
+        inorder(root->left, vec);
+        vec.push_back(root->data);
+        inorder(root->right, vec);
+    }
+    
+    Node *buildTree(vector<int> &inorder, int low, int high){
+        if(low > high)return NULL;
+        
+        int mid = (low+high)/2;
+        Node *root = new Node(inorder[mid]);
+        root->left = buildTree(inorder, low, mid-1);
+        root->right = buildTree(inorder, mid+1, high);
+        
+        return root;
+    }
+    
+    Node* buildBalancedTree(Node* root)
+    {
+        if(!root)return NULL;
+        vector<int> vec;
+        inorder(root, vec);
+        return buildTree(vec, 0, vec.size()-1);
+    
+    }
