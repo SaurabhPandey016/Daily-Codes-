@@ -1,0 +1,49 @@
+class Solution {
+public:
+    bool backspaceCompare(string s, string t) {
+        int i = s.size() - 1;      // Start at the end of string s.
+        int j = t.size() - 1;      // Start at the end of string t.
+        int backspaceCountS = 0;   // Counter for backspaces in s.
+        int backspaceCountT = 0;   // Counter for backspaces in t.
+
+        // Iterate while there are characters in either s or t to compare.
+        while (i >= 0 || j >= 0) {
+            // Handle backspaces and character comparisons for string s.
+            while (i >= 0 && (s[i] == '#' || backspaceCountS > 0)) {
+                if (s[i] == '#') {
+                    backspaceCountS++; // Increment backspace counter.
+                    i--;              // Move to the previous character.
+                } else if (backspaceCountS > 0) {
+                    backspaceCountS--; // Decrement backspace counter.
+                    i--;              // Move to the previous character.
+                }
+            }
+
+            // Handle backspaces and character comparisons for string t.
+            while (j >= 0 && (t[j] == '#' || backspaceCountT > 0)) {
+                if (t[j] == '#') {
+                    backspaceCountT++; // Increment backspace counter.
+                    j--;              // Move to the previous character.
+                } else if (backspaceCountT > 0) {
+                    backspaceCountT--; // Decrement backspace counter.
+                    j--;              // Move to the previous character.
+                }
+            }
+
+            // Compare characters if both s and t have characters to compare.
+            if (i >= 0 && j >= 0 && s[i] != t[j]) {
+                return false; // If characters don't match, return false.
+            }
+
+            // Check for the case where one string still has characters while the other doesn't.
+            if ((i >= 0 && j < 0) || (j >= 0 && i < 0)) {
+                return false; // Inequality because one string is longer.
+            }
+
+            i--; // Move to the previous character in s.
+            j--; // Move to the previous character in t.
+        }
+
+        return true; // Both strings are equal after backspaces.
+    }
+};
