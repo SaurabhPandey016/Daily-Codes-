@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+bool detectNegativeCycle(int n, int m, vector<vector<int>> &edges) {
+	vector<int> dist(n+1,1e8);
+	dist[1] = 0;
+	for(int i = 1;i<=n;i++){
+		for(auto i : edges){
+			int u = i[0];
+			int v = i[1];
+			int wt = i[2];
+
+			if(dist[u]+wt<dist[v]){
+				dist[v] = dist[u]+wt;
+			}
+		}
+	}
+		for(auto i : edges){
+		int u = i[0];
+		int v = i[1];
+		int wt = i[2];
+			if(dist[u]+wt<dist[v]){
+				return true;
+			}
+		}
+		return false;
+}
