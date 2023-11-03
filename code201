@@ -1,0 +1,131 @@
+#include<bits/stdc++.h> 
+
+using namespace std;
+
+int minTimeInWormholeNetwork(int n, int sx, int sy, int dx, int dy, Wormhole* wormhole) {    
+
+ int tot=2*n+2;//total vertex     
+
+int ax[tot+1],ay[tot+1],w[n+2];
+
+int vertex=0;   
+
+ 
+
+ ax[vertex]=sx;     ay[vertex]=sy;   
+
+  vertex++;    
+
+ ax[vertex]=dx;     ay[vertex]=dy; 
+
+    vertex++;  
+
+ 
+
+  for(int i=0; i<n; i++)    { 
+
+      ax[vertex]=wormhole[i].startX;   
+
+      ay[vertex]=wormhole[i].startY;      
+
+      vertex++;           
+
+     ax[vertex]=wormhole[i].endX;     
+
+     ay[vertex]=wormhole[i].endY;       
+
+     vertex++;         
+
+    w[i]=wormhole[i].cost;   
+
+  }
+
+    int adj[tot+2][tot+2];
+
+       for(int i=0;i<tot;i++)  {    
+
+        for(int j=0;j<tot;j++)  {    
+
+            int ans=abs(ax[i]-ax[j])+abs(ay[i]-ay[j]); 
+
+               adj[i][j]=ans;          
+
+            }      
+
+  }     
+
+   for(int i=0,j=2;i<n;i++,j+=2)   { 
+
+           adj[j][j+1]=w[i];//use wormhole cost        
+
+        adj[j+1][j]=w[i];//use wormhole cost     
+
+   }
+
+      int ans[tot+2],vis[tot+2];
+
+ 
+
+       for(int i=0;i<tot;i++)  {     
+
+       ans[i]=INT_MAX;//will contain min ans  
+
+        vis[i]=0;   
+
+     }      
+
+ 
+
+     ans[0]=0;
+
+  priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;       
+
+ 
+
+ pq.push({0,0});
+
+ 
+
+       while(pq.size())   {       
+
+      pair<int,int>p=pq.top();   
+
+       pq.pop();         
+
+      int cur_cost=p.first;       
+
+      int node=p.second;          
+
+     if(vis[node])continue;   
+
+       vis[node]=1;
+
+ 
+
+        for(int i=0;i<tot;i++)    {   
+
+             if(vis[i]==0)     {      
+
+              int now=cur_cost+adj[node][i];    
+
+                if(ans[i]>now)   
+
+                 {                     
+
+                ans[i]=now;        
+
+                pq.push({now,i});  
+
+                  }          
+
+          }         
+
+   }     
+
+ 
+
+   }  
+
+           return ans[1];
+
+}
