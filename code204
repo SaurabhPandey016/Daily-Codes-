@@ -1,0 +1,32 @@
+bool isposs(vector<vector<int>> &mat, vector<int> &c , int col,int node,int m){
+
+    for(int i=0;i<mat.size();i++){
+
+        if(mat[node][i]==1 && c[i]==col){
+
+            return false ;
+        }
+
+    }
+    return true;
+
+}
+
+bool color(vector<vector<int>> &mat, int m, int node, vector<int> &c){
+
+    if(node==mat.size()){
+
+        return true;
+
+    }
+    for(int i=1;i<=m;i++){
+
+        if(isposs(mat,c,i,node,m)){
+
+            c[node]=i;
+
+            if(color(mat, m, node+1, c)){
+
+                return true;
+
+            }
