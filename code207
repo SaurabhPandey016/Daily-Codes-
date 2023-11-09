@@ -1,0 +1,28 @@
+int columnWithMaxZeros(vector<vector<int>>arr,int N){
+        
+        // Your code here
+        priority_queue<pair<int,int>> pq;
+        for(int i=0;i<N;i++){
+            int c0=0; 
+            for(int j=0;j<N;j++){
+                if(arr[j][i]==0)
+                    c0++;
+            }
+            pq.push({c0,i});
+            
+        }
+        if(pq.top().first==0)
+            return(-1);
+        int ans=pq.top().first;
+        int c=pq.top().second;
+        while(!pq.empty() && pq.top().first ==ans)
+        {
+            c=pq.top().second;
+            
+            pq.pop();
+            
+        }
+        
+        return(c);
+            
+    }
