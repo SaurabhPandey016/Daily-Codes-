@@ -1,0 +1,16 @@
+bool check(string s, string t) {
+        int i = 0;
+        while (i < s.length()) {
+            if (s[i] != t[(i + 2) % s.length()])
+                return false;
+            i++;
+        }
+        return true;
+    }
+    bool isRotated(string str1, string str2)
+    {
+        if (str1.length() != str2.length())
+            return false;
+        
+        return check(str1, str2) or check(str2, str1);
+    }
