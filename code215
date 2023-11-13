@@ -1,0 +1,53 @@
+class DisjointSet{
+	public:
+	vector<int>parent,size;
+	DisjointSet(int n){
+		parent.resize(n+1);
+		size.resize(n+1);
+		for(int i=0;i<=n;i++){
+			parent[i]=i;
+			size[i]=1;
+		}
+	}
+	int findUpar(int x){
+		if(parent[x]==x)return x;
+		return parent[x]=findUpar(parent[x]);
+	}
+
+	void unionBySize(int x,int y){
+		x=findUpar(x);
+		y=findUpar(y);
+		if(x==y)return;
+		if(size[x]<size[y]){
+			parent[x]=y;
+			size[y]+=size[x];
+		}
+		else{
+			parent[y]=x;
+			size[x]+=size[y];
+		}
+	}
+
+};
+
+int countWays(int n, vector<vector<int>> &fruitIds)
+{
+	// Write your code here.
+	DisjointSet ds(n);
+	for(auto i:fruitIds){
+		ds.unionBySize(i[0], i[1]);
+	}
+	int ans=0;
+	int sum=0;
+
+	for(int i=0;i<n;i++){
+		if(ds.findUpar(i)==i){
+			int x=ds.size[i];
+			ans=ans+(sum*x);
+			sum+=x;
+		}
+	}
+	return ans;
+
+
+}
