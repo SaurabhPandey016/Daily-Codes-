@@ -1,0 +1,178 @@
+void markBridge(int start, vector< vector<int> > & graph, unordered_map<int, bool> isBridge[], unordered_map<int, int > Count[], int disc[], int low[], bool visited[], int & timer, int parent) {
+    visited[start] = true;
+    timer++;
+    disc[start] = timer;
+    low[start] = timer;
+    for(int i = 0; i < graph[start].size(); i++) {
+        int adj = graph[start][i];
+        if(adj == parent) continue;
+        if(visited[adj] == true) {
+            low[start] = min(low[start], low[adj]);
+            continue;
+        }
+        markBridge(adj, graph, isBridge, Count, disc, low, visited, timer, start);
+        low[start] = min(low[start], low[adj]);
+        if(disc[start] < low[adj] && Count[start][adj] == 1) {
+            isBridge[start][adj] = true;
+            isBridge[adj][start] = true;
+        }
+    }
+}
+
+void createBridgeTree(int s, vector< vector<int> > & graph, queue< int> Queue[], int & component, vector< vector<int > > &Tree, bool visited[], int componentNo[], unordered_map<int, bool> isBridge[], unordered_map<int, int > newCost[], unordered_map<int, int > Cost[]) {
+    Queue[component].push(s);
+    visited[s] = 1;
+    int currComponent = component;
+    while(! Queue[currComponent].empty()) {
+        int node = Queue[currComponent].front();
+        Queue[currComponent].pop();
+        componentNo[node] = currComponent;
+        for(int i = 0; i < graph[node].size(); i++) {
+            int adj = graph[node][i];
+            if(isBridge[adj][node] && visited[adj] == 0) {
+                component++;
+                Tree[currComponent].push_back(component);
+                Tree[component].push_back(currComponent);
+                newCost[component][currComponent] = Cost[adj][node];
+                newCost[currComponent][component] = Cost[adj][node];
+                createBridgeTree(adj, graph, Queue, component, Tree, visited, componentNo, isBridge, newCost, Cost);
+            } else if(visited[adj] == 0) {
+                visited[adj] = 1;
+                Queue[currComponent].push(adj);
+            }
+        }
+    }
+}
+
+void dfs(int u, int p, int L[], vector< vector<int> > &P, int MAXL, vector< vector<int> > &Tree, int & vis) {
+    L[u] = p != -1 ? L[p]+1 : 1;
+    P[0][u] = p;
+    for(int j = 1; j < MAXL; j++) {
+        int x = P[j - 1][u];
+        if(x < 0) {
+            break;
+        }
+        P[j][u] = P[j - 1][x];
+    }
+    ++vis;
+    for(int i = 0; i < Tree[u].size(); i++) {
+        int v = Tree[u][i];
+        if(v == p) {
+            continue;
+        }
+        dfs(v, u, L, P, MAXL, Tree, vis);
+    }
+}
+
+int lca(int p, int q, int L[], vector< vector<int> > &P) {
+    int log, i;
+    if (L[p] < L[q]) {
+        swap(p, q);
+    }
+    for(log = 1; (1 << log) <= L[p]; log++);
+    log--;
+    for(i = log; i >= 0; i--) {
+        if(L[p] - (1 << i) >= L[q]) {
+            p = P[i][p];
+        }
+    }
+    if (p == q) {
+        return p;
+    }
+    for (i = log; i >= 0; i--){
+        if (P[i][p] != -1 && P[i][p] != P[i][q]) {
+            p = P[i][p];
+            q = P[i][q];
+        }
+    }
+    return P[0][p];
+}
+
+void init(int disc[], int low[], bool visited[], int n) {
+    for(int i = 0; i < n; i++) {
+        disc[i] = 0;
+        low[i] = INT_MAX;
+        visited[i] = false;
+    }
+}
+
+void calculate(int s, int S[], int E[], int M[], vector< vector<int> > & Tree, int p, unordered_map<int, int > Cost[], int &ans) {
+    for(auto x : Tree[s]) {
+        if(x == p) {
+            continue;
+        }
+        calculate(x, S, E, M, Tree, s, Cost , ans);
+        S[s] += S[x];
+        E[s] += E[x];
+        M[s] += M[x];
+        int down = S[x] - M[x];
+        int up = E[x] - M[x];
+        ans += 1ll * Cost[x][s] * min(up, down);
+    }
+}
+
+int minimumEnergy(int n, int m, int q, vector< vector<int> > & rivers, vector< vector<int> > & travels) {
+    vector< vector<int> > graph(n);
+    int disc[n];
+    int low[n];
+    int timer = 0;
+    bool visited[n];
+    unordered_map<int, int > Cost[n];
+    unordered_map<int, bool> isBridge[n];
+    unordered_map<int, int > Count[n];
+
+    for(int i = 0; i < m; i++) {
+        int u, v, w;
+        u = rivers[i][0];
+        v = rivers[i][1];
+        w = rivers[i][2];
+        graph[u].push_back(v);
+        graph[v].push_back(u);
+        Cost[u][v] = w;
+        Cost[v][u] = w;
+        Count[u][v]++;
+        Count[v][u]++;
+    }
+
+    init(disc, low, visited,  n);
+    markBridge(0, graph, isBridge, Count, disc, low, visited, timer, -1);
+
+    vector< vector< int > > Tree(n);
+    queue< int > Queue[n];
+    int component = 0;
+    memset(visited, 0 , sizeof(visited));
+    int componentNo[n];
+    unordered_map<int, int > newCost[n];
+    createBridgeTree(0, graph, Queue, component, Tree, visited, componentNo, isBridge, newCost, Cost);
+
+    int MAXL = 19;
+    int L[n+1];
+    vector<vector<int> > P(MAXL, vector<int>(n));
+    int vis = 0;
+    dfs(0, -1, L, P, MAXL, Tree, vis);
+
+    int S[n];
+    int E[n];
+    int M[n];
+    memset(S, 0, sizeof(S));
+    memset(E, 0, sizeof(E));
+    memset(M, 0, sizeof(M));
+
+    for(int i = 0; i < q; i++) {
+        int u = travels[i][0];
+        int v = travels[i][1];
+        if(componentNo[u] == componentNo[v]) {
+            continue;
+        }
+        u = componentNo[u];
+        v = componentNo[v];
+        S[u]++;
+        E[v]++;
+        int l =lca(u, v, L, P);
+        M[l]++;
+    }
+
+    int ans = 0;
+    calculate(0, S, E, M, Tree, -1, newCost, ans);
+    return ans;
+}
