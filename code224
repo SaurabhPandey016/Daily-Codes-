@@ -1,0 +1,108 @@
+#include<bits/stdc++.h>
+
+int solve(vector<int>&nums,int i,int req,int s,int k)
+
+{
+
+    if(k==0)
+
+    {
+
+        return true;
+
+    }
+
+    if(s==req)
+
+    {
+
+        return solve(nums,0,req,0,k-1);
+
+    }
+
+    if(i>=nums.size())
+
+    {
+
+       return false;
+
+    }
+
+    if(nums[i]!=-1 && s+nums[i]<=req)
+
+    {
+
+          int n=nums[i];
+
+          nums[i]=-1;
+
+          if(solve(nums,i+1,req,s+n,k))
+
+          {
+
+              return true;
+
+          }
+
+          nums[i]=n;
+
+          if(solve(nums,i+1,req,s,k))
+
+          {
+
+              return true;
+
+          }
+
+          return false;
+
+    }
+
+    else
+
+    {
+
+        return solve(nums,i+1,req,s,k);
+
+    }
+
+    
+
+}
+
+bool canPartitionKSubsets(vector<int>& nums, int n, int K)
+
+{
+
+    // Write your code here.
+
+    int sum=0;
+
+    for(int i=0;i<n;i++)
+
+    {
+
+        sum+=nums[i];
+
+    }
+
+    if(sum%K!=0)
+
+    {
+
+        return false;
+
+    }
+
+    else
+
+    {
+
+        int req=sum/K;
+
+        return solve(nums,0,req,0,K);
+
+    }
+
+}
+
