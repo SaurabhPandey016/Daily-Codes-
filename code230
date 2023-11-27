@@ -1,0 +1,20 @@
+int detectCycle(int v, vector<int>adj[])
+{
+    // Code here
+    set<pair<int,int>> s;
+    
+    disjoint ds(v);
+    for(int i=0;i<v;i++){
+        for(int j=0;j<adj[i].size();j++){
+            if(s.find({i,adj[i][j]})!=s.end() or s.find({adj[i][j],i})!=s.end()){
+                continue;
+            }
+            s.insert({i,adj[i][j]});
+            int u=ds.findpar(i);
+            int v=ds.findpar(adj[i][j]);
+            if(u==v)return 1;
+            ds.unionrank(i,adj[i][j]);
+        }
+    }
+    return 0;
+    
