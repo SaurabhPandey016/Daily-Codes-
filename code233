@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+
+int findIndexOf(const std::string &a, const std::string &b) {
+  int n = b.length();
+  int m = a.length();
+  if (n < m) {
+    return -1;
+  }
+  std::vector<int> badChar(256, -1);
+  for (int i = 0; i < m; i++) {
+    badChar[static_cast<int>(a[i])] = i;
+  }
+  int i = 0;
+  while (i <= n - m) {
+    int j = m - 1;
+    while (j >= 0 && a[j] == b[i + j]) {
+      j--;
+    }
+    if (j < 0) {
+      return i;
+    }
+    int charShift = j - badChar[static_cast<int>(b[i + j])];
+    if (charShift < 1) {
+      charShift = 1;
+    }
+    i += charShift;
+  }
+  return -1;
+}
