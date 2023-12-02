@@ -1,0 +1,15 @@
+#include <bits/stdc++.h> 
+
+int mod = 1e9 + 7;
+
+vector<int> countOfPaths(int N, int K, vector<int> &arr){
+
+    vector<int> dp(N,0);
+
+    dp[0] = 1;
+
+ for(int i=1;i<N;i++) for(int j=0;j<i;j++) if(arr[i]%arr[j] == 0) dp[i] = (dp[i] + dp[j]) % mod;
+
+    return dp;
+
+}
