@@ -1,0 +1,33 @@
+void Inorder(Node*root,vector<int>&a){
+        if(root){
+            Inorder(root->left,a);
+            a.push_back(root->data);
+            Inorder(root->right,a);
+        }
+    }
+    
+    int countPairs(Node* root1, Node* root2, int x)
+    {
+        if(root1==nullptr||root2==nullptr){
+            return 0;
+        }
+        vector<int>a1;
+        vector<int>a2;
+        Inorder(root1,a1);
+        Inorder(root2,a2);
+        int i=0;
+        int j=a2.size()-1;
+        int count=0;
+        while(i<a1.size() && j>=0){
+            if(a1[i]+a2[j]==x){
+                count++;
+                i++;
+                j--;
+            }else if(a1[i]+a2[j]<x){
+                i++;
+            }else{
+                j--;
+            }
+        }
+        return count;
+    }
