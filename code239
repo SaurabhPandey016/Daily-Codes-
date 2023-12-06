@@ -1,0 +1,81 @@
+void preCompute(vector < int > &reduced, int maxn) {
+
+ 
+
+   // Compute the reduced form using sieve.    
+
+   for (int i = 2; i <= maxn; i++) {                
+
+       // Means that i is a prime.        
+
+        if (reduced[i] == 1) {                       
+
+            // Add i to all its multiples.            
+
+            for (int j = i; j <= maxn; j += i)                
+
+            reduced[j] *= i;        
+
+            }    
+
+        } 
+
+    } 
+
+    vector < int > coprimeTwins(vector < int > & A, vector < pair < int, int > > & Queries) {        
+
+        int maxn = *max_element(A.begin(), A.end());    
+
+        // Vector to store the reduced form    
+
+        vector < int > reduced(maxn + 1, 1);        
+
+        // Precompute the reduced form using sieve.    
+
+        preCompute(reduced, maxn);    
+
+        for (int & x: A) {
+
+       // Replace each number with reduced form.        
+
+       x = reduced[x];    
+
+       }    
+
+       // Store the frequency of each number.    
+
+       vector < int > cnt(maxn + 1);
+
+ 
+
+   // To store the answer for each query.    
+
+   vector < int > answer(Queries.size());    
+
+   for (int i = 0; i < Queries.size(); i++) {        
+
+       int L = Queries[i].first - 1, R = Queries[i].second - 1;                
+
+       // Iterate from L to R to calculate the answer.        
+
+       for (int j = L; j <= R; j++) {            
+
+           answer[i] += cnt[A[j]];            
+
+           cnt[A[j]]++;        
+
+           }        
+
+           // Clear the cnt for new query.        
+
+           for (int j = L; j <= R; j++) {            
+
+               cnt[A[j]] = 0;        
+
+               }    
+
+    }    
+
+    return answer; 
+
+}
