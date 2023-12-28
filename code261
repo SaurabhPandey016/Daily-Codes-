@@ -1,0 +1,31 @@
+int f(int i,int j,string& wild,string& pattern,vector<vector<int>>&dp){
+        //Base Case
+        // case 1 if(wild is exhausted && pattern is exhausted)
+        if(i<0 && j<0)return true;
+        // case 2 if(wild is exhausted and pattern is remaining)
+        if(i<0 && j>=0)return false;
+        //case 3 if(wild is remaining and pattern is exhausted)
+        if(i>=0 && j<0){
+            // chech if all the remaining wild is '*' or not
+            for(int k=0;k<=i;k++){
+                if(wild[k]!='*')return false;
+            }
+            return true;
+        }
+        //case 4 if(already calculated)
+        if(dp[i][j]!=-1)return dp[i][j];
+        // condition 1 for recursion if(match or wild[i]=='?') we go back in both string
+        if(wild[i]==pattern[j] || wild[i]=='?')
+        {
+            return dp[i][j]=f(i-1,j-1,wild,pattern,dp);
+        }else if(wild[i]=='*'){// if wild is '*' then there would be two call either move in wild or pattern
+            return dp[i][j]=f(i-1,j,wild,pattern,dp)|f(i,j-1,wild,pattern,dp);
+        }
+        return dp[i][j]=false;
+    }
+    bool match(string wild, string pattern)
+    {
+        int n=wild.size(),m=pattern.size();
+        vector<vector<int>>dp(n,vector<int>(m,-1));
+        return f(n-1,m-1,wild,pattern,dp);
+    }
