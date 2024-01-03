@@ -1,0 +1,13 @@
+ int smallestSubstring(string s) {
+        // Code here
+        int n = s.size();
+        int ans = 1e9;
+        vector<int> map(3,-1);
+        for(int i=0;i<n;i++) {
+            map[s[i]-'0'] = i;
+            if(map[0]!=-1 && map[1]!=-1 && map[2]!=-1) {
+                ans = min(ans,max(map[0],max(map[1],map[2])) - min(map[0],min(map[1],map[2]))+1);
+            }
+        }
+        return (ans==1e9)?-1:ans;
+    }
