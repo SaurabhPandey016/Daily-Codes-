@@ -1,0 +1,21 @@
+queue<int> modifyQueue(queue<int> q, int k) {
+        // add code here.
+        int n = q.size();
+        deque<int> dq;
+        for(int i=0;i<n;i++){
+            int temp = q.front();
+            if(i < k){
+                dq.push_front(temp);
+            }else{
+                dq.push_back(temp);
+            }
+            q.pop();
+        }
+        while(!dq.empty()){
+            int temp = dq.front();
+            q.push(temp);
+            dq.pop_front();
+        }
+        return q;
+    }
+
