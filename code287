@@ -1,0 +1,31 @@
+ void checkNode(Node *root, vector<int>& vc, const int sum, vector<vector<int>>& result)
+    {
+
+        if (root == nullptr) return;
+
+        vc.push_back(root->key);
+
+        int remainingSum = sum - root->key;
+        
+        if (remainingSum == 0)
+        {
+            result.push_back(vc);
+        }
+        
+        vector<int> vcc = vc;
+
+        checkNode(root->left, vcc, remainingSum, result);
+
+        checkNode(root->right, vc, remainingSum, result);
+    }
+
+    public:
+    vector<vector<int>> printPaths(Node *root, int sum)
+    {
+        vector<vector<int>> result;
+        
+        vector<int> start;
+        checkNode(root, start, sum, result);
+        
+        return result;
+    }
