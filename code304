@@ -1,0 +1,45 @@
+class Solution {
+public:
+    int numSquares(int n) {
+        int highest = int(sqrt(n));
+        vector<int> perfect_squares(highest);
+        vector<int> seen(n, 0);
+        
+        for (int i = 1; i <= highest; i++) {
+            int idx = i*i;
+            perfect_squares[i-1] = idx;
+            seen[idx-1] = 1;
+        }
+        
+        if (perfect_squares.back() == n) {
+            return 1;
+        }
+        
+        queue<int> q;
+        for (auto& num : perfect_squares) {
+            q.push(num);
+        }
+        
+        int count = 1;
+        while (!q.empty()) {
+            count++;
+            int qsize = q.size();
+            for (int i = 0; i < qsize; i++) {
+                int current = q.front();
+                for (auto& num : perfect_squares) {  
+                    int sum = current + num;
+                    if (sum == n) {
+                        return count;
+                    } else if (sum < n && seen[sum-1] == 0) {
+                        q.push(sum);
+                        seen[sum-1] = count;
+                    } else if (sum > n) {
+                        break;
+                    }
+                }
+                q.pop();
+            }
+        }
+        return 0;
+    }
+};
