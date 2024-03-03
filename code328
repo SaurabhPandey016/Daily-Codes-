@@ -1,0 +1,4 @@
+string printLargest(int n, vector<string> &arr) {
+        sort(arr.begin(), arr.end(), [](const string &a, const string &b) {return (a + b) > (b + a);});
+        return accumulate(arr.begin(), arr.end(), string(""));
+    }
