@@ -1,0 +1,19 @@
+ char nthCharacter(string s, int r, int n) {
+        //code here
+        string str;
+        string t=s;
+        while(r--){
+            str="";
+            for(int i=0;i<s.size();i++){
+                if(s[i]=='1')
+                    str+="10";
+                else 
+                    str+="01";
+                if(str.size()>=t.size())
+                break;
+            }
+            s=str;
+        }
+        //cout<<s[n]<<" ";
+        return s[n];
+    }
