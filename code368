@@ -1,0 +1,23 @@
+int grayToBinary(int n)
+    {
+
+        int rez =0; // rezultat final
+      int prev=0; // valoarea precedenta a bitului
+      int curr=0 ; // valoarea curenta a bitului
+        for(int i=31;i>=0;i--){
+            // verifică al-lea bit din n
+            curr= (n>>i) & 1;
+
+            // operatia xor dintre bitul curent si bitul precedent 
+            curr^=prev;
+
+          // stochează bitul curent ca anterior pentru următoarea iterație
+            prev=curr;
+
+          // dacă valoarea bitului curr  după xor este 1, adăugați valoarea lui la rezultat
+            if(curr){
+                rez+=(1<<i); 
+            }
+        }
+        return rez;
+    }
