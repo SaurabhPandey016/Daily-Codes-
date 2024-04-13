@@ -1,0 +1,11 @@
+long long reversedBits(long long x) {
+        long long ans=0;
+        for(int i=0; i<=31; i++){
+            long long a = 1<<i;
+            ans = ans<<1;
+            if(x&a){ 
+                ans += 1;
+            }
+        }
+        return ans;
+    }
