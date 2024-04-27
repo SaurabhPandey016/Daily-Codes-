@@ -1,0 +1,65 @@
+Node *getMid(Node *head) {
+        Node *slow = head, *fast = head->next;
+        
+        while(fast and fast->next) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        
+        return slow;
+    }
+    
+    Node *merging(Node *l, Node *r) {
+        if(!l)
+            return r;
+            
+        if(!r)
+            return l;
+            
+        Node *dummy = new Node(-1);
+        Node *temp = dummy;
+        
+        while(l and r) {
+            if(l->data <= r->data) {
+                temp->next = l;
+                l->prev = temp;
+                l = l->next;
+            } else {
+                temp->next = r;
+                r->prev = temp;
+                r = r->next;
+            }
+            
+            temp = temp->next;
+        }
+        
+        while(l) {
+            temp->next = l;
+            l->prev = temp;
+            l = l->next;
+            temp = temp->next;
+        }
+        
+        while(r) {
+            temp->next = r;
+            r->prev = temp;
+            r = r->next;
+            temp = temp->next;
+        }
+        
+        dummy->next->prev = NULL;
+        return dummy->next;
+    }
+
+    Node *sortDoubly(struct Node *head) {
+        if(!head or !head->next)
+            return head;
+        
+        Node *left = head;
+        Node *mid = getMid(head);
+        Node *right = mid->next;
+        mid->next = NULL;
+        
+        Node *res = merging(sortDoubly(left), sortDoubly(right));
+        return res;
+    }
