@@ -1,0 +1,29 @@
+#include <iostream>
+
+using namespace std;
+
+ 
+
+int area(int l , int b){
+
+    int ar= l*b ;
+
+    return ar ;
+
+}
+
+int main() {
+
+    //Write your code here
+
+    int l , b ;
+
+    cin >> l >> b ;
+
+   int a= area(l,b) ;
+
+    cout << a ;
+
+    return 0;
+
+}
