@@ -1,0 +1,23 @@
+void dfs(Node* root, unordered_map<int, int> &mp, int idx, int &minidx, int &maxidx){
+        if(root == NULL){
+            return;
+        }
+        minidx = min(idx, minidx);
+        maxidx = max(idx, maxidx);
+        mp[idx] += root->data;
+        dfs(root->left, mp, idx - 1, minidx, maxidx);
+        dfs(root->right, mp, idx + 1, minidx, maxidx);
+        return;
+    }
+  public:
+    vector <int> verticalSum(Node *root) {
+        unordered_map<int, int> mp;
+        int minIdx = 0;
+        int maxIdx = 0;
+        dfs(root, mp, 0, minIdx, maxIdx);
+        vector<int> ans;
+        for(int i = minIdx; i <= maxIdx; i++){
+            ans.push_back(mp[i]);
+        }
+        return ans;
+    }
