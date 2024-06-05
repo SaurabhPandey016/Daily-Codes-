@@ -1,0 +1,49 @@
+int findSwapValues(int a[], int n, int b[], int m) {
+        // Your code goes here
+        
+        //sorting both array because we will use binary array
+        
+        sort(a ,a+n);
+        sort(b ,b+m);
+        
+        
+        //calculating the sum of array a
+        int sum_a = 0;
+        for(int i =0;i<n;i++)
+        {
+            sum_a += a[i];
+        }
+        
+        
+        //calculating the sum of array b
+        int sum_b = 0;
+        for(int i =0;i<m;i++)
+        {
+            sum_b += b[i];
+        }
+        
+        // both array have equal sum no need to swap elements
+        if(sum_a == sum_b) return 1;
+        
+        //if total of both array is odd we can't take medium
+        
+        if( (sum_a+sum_b) % 2==1) return -1;
+
+
+        //taking medium of both sum  for check can we decrease or inverse sum of any array till average of both sum
+
+
+        int avg = (sum_a + sum_b)/2;
+        
+        int diff = avg - min(sum_a,sum_b);
+        
+        for(int i=0;i<n;i++)
+        {
+            if(  binary_search(b, b + m, (a[i]+diff) )|| binary_search(b, b + m,(a[i]-diff) ) ) // a[i] + diff use full when size of a is bigger otherwise a[i] - diff will be useful.
+
+
+            return 1;
+        }
+        
+        return -1;
+    }
