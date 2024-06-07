@@ -1,0 +1,25 @@
+int maxOccured(int n, int l[], int r[], int maxx) {
+        vector<pair<int,char>>x;
+        for(int i=0;i<n;i++){
+            x.push_back({l[i],'l'});
+            x.push_back({r[i],'r'});
+        }
+        sort(x.begin(),x.end());
+        int maxi = INT_MIN;
+        int ct = 0;
+        int ans = -1;
+        for(auto pai:x){
+            char c = pai.second;
+            if(c == 'l'){
+                ct++;
+            }
+            else{
+                ct--;
+            }
+            if(ct > maxi){
+                ans = pai.first;
+                maxi = ct;
+            }
+        }
+        return ans;
+    }
