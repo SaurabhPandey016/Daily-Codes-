@@ -1,0 +1,7 @@
+string armstrongNumber(int n) {
+        int a=n%10;
+        int b=(n%100-a)/10;
+        int c=n/100;
+        if((a*a*a+b*b*b+c*c*c)==n)return "true";
+        return "false";
+    }
