@@ -1,0 +1,52 @@
+#include <iostream>
+
+using namespace std;
+
+ 
+
+int main() {
+
+    int N;
+
+    cin >> N;
+
+    
+
+    int sumEven = 0, sumOdd= 0;
+
+    while(N != 0){
+
+ 
+
+     // extracting digits from our number
+
+        int digit = N % 10;
+
+ // ab   even  aur  odd  digits  alag  krke  sum  print    krte  hai
+
+ 
+
+        if (digit % 2 == 0) {
+
+            sumEven += digit;
+
+        } 
+
+       else {
+
+            sumOdd += digit;
+
+        }
+
+        N /= 10;
+
+    }
+
+    cout <<  sumEven << " " <<  sumOdd;
+
+ 
+
+    return 0;
+
+}
+
