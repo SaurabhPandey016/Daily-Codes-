@@ -1,0 +1,26 @@
+int findCoverage(vector<vector<int>>& matrix) {
+        // Code here
+        int n=matrix.size(),m=matrix[0].size();
+        int count=0;
+        int delrow[]={-1,0,1,0};
+        int delcol[]={0,-1,0,1};
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if(matrix[i][j]==0)
+                {
+                    for(int k=0;k<4;k++)
+                    {
+                        int nrow=i+delrow[k];
+                        int ncol=j+delcol[k];
+                        if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && matrix[nrow][ncol]==1)
+                        {
+                            count++;
+                        }
+                    }
+                }
+            }
+        }
+        return count;
+    }
