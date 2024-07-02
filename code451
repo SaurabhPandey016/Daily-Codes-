@@ -1,0 +1,21 @@
+bool compute(Node* head) {
+        string s = "";  //Taking a String to store the respective strings from each node
+        
+        Node * temp = head; // Temporary Node to transverse the Linked List
+        
+        while(temp != nullptr){ 
+            s += temp->data;
+            temp=temp->next;
+        }
+        // Transversing the Loop and adding the strings "temp->data" to String s
+        
+        int len = s.length();
+
+        // Checking for Palindrome for the String s    
+        for(int i = 0; i < len/2; i++){
+            if(s[i] != s[len-i-1]){
+                return false;
+            }
+        }
+        return true;
+    }
