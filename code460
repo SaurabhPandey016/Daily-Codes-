@@ -1,0 +1,46 @@
+int MaxConnection(vector<vector<int>>& grid) {
+        int n = grid.size();
+        int m = grid[0].size();
+        vector<int> dx = {-1, 0, 1, 0};
+        vector<int> dy = {0, -1, 0, 1};
+        DSU dsu(n * m);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j]) {
+                    int node = i * m + j;
+                    for (int k = 0; k < 4; k++) {
+                        int ni = i + dx[k];
+                        int nj = j + dy[k];
+                        if (ni >= 0 && ni < n && nj >= 0 && nj < m && grid[ni][nj]) {
+                            int temp = ni * m + nj;
+                            dsu.unite(node, temp);
+                        }
+                    }
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] == 0) {
+                    unordered_set<int> baap;
+                    for (int k = 0; k < 4; k++) {
+                        int ni = i + dx[k];
+                        int nj = j + dy[k];
+                        if (ni >= 0 && ni < n && nj >= 0 && nj < m && grid[ni][nj]) {
+                            int temp = ni * m + nj;
+                            baap.insert(dsu.find(temp));
+                        }
+                    }
+                    int total_sz = 1;
+                    for (auto it : baap) {
+                        total_sz += dsu.getSize(it);
+                    }
+                    ans = max(ans, total_sz);
+                } else {
+                    ans = max(ans, dsu.getSize(i * m + j));
+                }
+            }
+        }
+        return ans;
+    }
