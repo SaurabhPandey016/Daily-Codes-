@@ -1,0 +1,29 @@
+Node* solve(int i, int j, vector<int>&nums){
+        if(i>j){
+            return NULL;
+        }
+        if(i==j){
+            Node* node=new Node(nums[i]);
+            return node;
+        }
+        
+        int mid=i+(j-i)/2;
+        Node* lft=solve(i, mid-1, nums);
+        Node* rgt=solve(mid+1, j, nums);
+        
+        Node* root=new Node(nums[mid]);
+        root->left=lft;
+        root->right=rgt;
+        return root;
+    }
+  
+    Node* sortedArrayToBST(vector<int>& nums) {
+        // Code here
+        int n=nums.size();
+        if(n==0) return NULL;
+        else if(n==1){
+            Node* root=new Node(nums[0]);
+            return root;
+        }
+        return solve(0, n-1, nums);
+    }
