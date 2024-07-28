@@ -1,0 +1,17 @@
+ string removeDups(string str) {
+        unordered_map<char,int>mpp;
+        for(auto it:str)
+        {
+            mpp[it]++;
+        }
+        string d="";
+        for(int i=0;i<str.length();i++)
+        {
+            if(mpp.find(str[i])!=mpp.end())
+            {
+                d+=str[i];
+                mpp.erase(str[i]);
+            }
+        }
+        return d;
+    }
