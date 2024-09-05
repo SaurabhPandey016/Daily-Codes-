@@ -1,0 +1,67 @@
+int minJumps(int arr[], int n){
+        if(n == 1){
+            return 0;
+        }
+        
+        if(arr[0] == 0){
+            return -1;
+        }
+        
+        int rng = arr[0];
+        int st = arr[0];
+        int jump = 1;
+        
+        for(int i = 1; i < n; i++){
+            if(i == n - 1){
+                return jump;
+            }
+            
+            rng = max(rng, i + arr[i]);
+            st--;
+            
+            if(st == 0){
+                jump++;
+                
+                if(rng <= i){
+                    return -1;
+                }
+                
+                st = rng - i;
+            }
+        }
+        
+        return -1;
+    }int minJumps(int arr[], int n){
+        if(n == 1){
+            return 0;
+        }
+        
+        if(arr[0] == 0){
+            return -1;
+        }
+        
+        int rng = arr[0];
+        int st = arr[0];
+        int jump = 1;
+        
+        for(int i = 1; i < n; i++){
+            if(i == n - 1){
+                return jump;
+            }
+            
+            rng = max(rng, i + arr[i]);
+            st--;
+            
+            if(st == 0){
+                jump++;
+                
+                if(rng <= i){
+                    return -1;
+                }
+                
+                st = rng - i;
+            }
+        }
+        
+        return -1;
+    }
