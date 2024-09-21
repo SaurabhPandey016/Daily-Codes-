@@ -1,0 +1,35 @@
+ Node *copyList(Node *head) {
+        // Write your code here
+        Node *ans = nullptr,*prev,*ans_head;
+        Node *temp = head;
+        // unordered_map<pair<Node*,Node*>,pair<Node*,Node*>>mp;
+        unordered_map<Node*,Node*>mp;
+        while(temp)
+        {
+            Node *t = new Node(temp->data);
+            if(ans==nullptr)
+            {
+                ans = t;
+                ans_head = t;
+                
+            }
+            else
+            {
+                ans_head->next = t;
+                ans_head = ans_head->next;
+            }
+            mp[temp] = ans_head;
+            temp = temp->next;
+        }
+        temp = head;
+        Node *temp1 = ans;
+        while(temp)
+        {
+            Node *random = mp[temp->random];
+            temp1->random = random;
+            temp=temp->next;
+            temp1=temp1->next;
+        }
+        return ans;
+        
+    }
