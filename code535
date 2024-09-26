@@ -1,0 +1,9 @@
+int maxStep(vector<int>& arr) {
+        int maxi=0,cnt=0;
+        for(int i=1;i<arr.size();i++){
+            if(arr[i]>arr[i-1]) cnt++;
+            else cnt=0;
+            maxi=max(maxi,cnt);
+        }
+        return maxi;
+    }
