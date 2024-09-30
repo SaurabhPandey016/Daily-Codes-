@@ -1,0 +1,13 @@
+#include <bits/stdc++.h> 
+#include <iostream>
+using namespace std;
+
+int main() {
+    int principal, time, Simple_interest;
+    float rate;
+    cin>> principal >> rate >> time;
+    Simple_interest = principal*rate*time/100;
+    cout<< Simple_interest;
+
+    return 0;
+}
