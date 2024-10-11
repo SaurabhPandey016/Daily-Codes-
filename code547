@@ -1,0 +1,26 @@
+vector<int> rearrange(const vector<int>& ans) {
+        // Code here
+        int n=ans.size();
+        vector<int>arr(n);
+        
+priority_queue<int,vector<int>,greater<int>>pq;
+    for(int i=0;i<n;i++)
+    {
+    if(ans[i]>-1){
+        pq.push(ans[i]);
+    }
+    }
+        for(int i=0;i<n;i++){
+            
+            if(i==pq.top()){
+                arr[i]=pq.top();
+                pq.pop();
+            }
+            else{
+                arr[i]=-1;
+            }
+        }
+        
+        return arr;
+    
+    }
