@@ -1,0 +1,16 @@
+ int sumOfLastN_Nodes(struct Node* head, int n) {
+        // Code here
+        vector<int>stores;
+        Node* temp=head;
+        while(temp){
+            stores.push_back(temp->data);
+            temp=temp->next;
+        }
+        
+        int m=stores.size();
+        int sum=0;
+        for(int i=m-1;i>m-n-1;i--){
+            sum+=stores[i];
+        }
+        return sum;
+    }
