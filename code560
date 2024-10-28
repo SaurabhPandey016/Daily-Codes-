@@ -1,0 +1,9 @@
+unordered_set<int>seen;
+        vector<int>ans;
+        for(int i:arr){
+            if(seen.find(i) == seen.end()){
+                ans.push_back(i);
+                seen.insert(i);
+            }
+        }
+        return ans;
