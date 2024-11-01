@@ -1,0 +1,18 @@
+long long maxSum(vector<int>& a) {
+        long long ans=0;
+        sort(a.begin(),a.end());
+        int i=0,j=a.size()-1;
+        int l=0;
+        vector<int>aa;
+        aa=a;
+        while(i<=j){
+            a[l++]=aa[i++];
+            if(l>=aa.size())break;
+            a[l++]=aa[j--];
+        }
+        for(int i=1;i<a.size();i++){
+           ans+=abs(a[i]-a[i-1]);
+        }
+        ans+=abs(a.back()-a[0]);
+        return ans;
+    }
