@@ -1,0 +1,28 @@
+class Solution {
+public:
+    bool rotateString(string s, string goal) {
+        
+        if(s.size() != goal.size()) return false;
+
+        goal += goal;
+        
+        int n = goal.size();
+        for(int i = 0; i<n; i++) {
+
+            if(goal[i] == s[0]) {
+
+                int cnt = s.size(), j = i;
+                for(auto it : s) {
+
+                    if(it == goal[j]) {
+                        j++, cnt --;   
+                    }
+                    if(cnt == 0) return true;
+                }
+            }
+
+        }
+
+        return false;
+    }
+};
