@@ -1,0 +1,10 @@
+void rotateArr(vector<int>& arr, int d) {
+        // code here
+        int n=arr.size();
+        d=d%n;
+        if(d==0)return;
+        for(int i=0;i<d;i++){
+            arr.push_back(arr[i]);
+        }
+        arr.erase(arr.begin()+0, arr.begin()+d);
+    }
