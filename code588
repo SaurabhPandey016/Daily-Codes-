@@ -1,0 +1,18 @@
+ int maxSum = arr[0];
+      int sum = arr[0];
+      int minSum = arr[0];
+       int mini = arr[0];
+       int totalSum = arr[0];
+      for(int i = 1; i < arr.size();i++){
+        //step1
+         totalSum += arr[i];
+        //step2
+          sum = max(sum + arr[i],arr[i]);
+          maxSum = max(sum,maxSum);
+       //kadane 's algorithm for finding minimum subarray sum:::step3
+          mini = min(mini + arr[i],arr[i]);
+          minSum = min(mini,minSum);
+        
+      }
+      return max(maxSum,totalSum - minSum);
+    }
