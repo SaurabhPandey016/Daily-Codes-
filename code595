@@ -1,0 +1,12 @@
+bool twoSum(vector<int>& arr, int target) {
+       
+       int n = arr.size();
+       set<int> st;
+       
+       for(int i = 0; i<n; i++) {
+           if(st.find(target - arr[i]) != st.end()) return true;
+           st.insert(arr[i]);
+       }
+       return false;
+       
+    }
