@@ -1,0 +1,16 @@
+int countPairs(vector<int> &arr, int target) {
+     
+        sort(arr.begin(),arr.end());
+        int ans =0;
+        
+        for(int i = 0;i<arr.size();i++){
+            int first = arr[i];
+            int second = target-arr[i];
+            
+            ans += (upper_bound(arr.begin()+i+1,arr.end(),second)- 
+                    lower_bound(arr.begin()+i+1,arr.end(),second));
+        }
+        
+        return ans;
+    }
+
