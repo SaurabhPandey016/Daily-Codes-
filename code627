@@ -1,0 +1,27 @@
+vector<int> subarraySum(vector<int> &arr, int target) {
+        // code here
+        unordered_map<int, pair<int,int>> mp;
+        int n = arr.size();
+        
+        vector<int> pref(n, 0);
+        pref[0] = arr[0];
+        
+        for (int i=1; i<n; i++) {
+            pref[i] = pref[i-1] + arr[i];
+        }
+        
+        for (int i=0; i<n; i++) {
+            if (pref[i] == target) {
+                return {1, i+1};
+            }
+            
+            if (mp.find(pref[i] - target) != mp.end()) {
+                return {mp[pref[i]-target].second+1, i+1};
+            }
+            
+            mp[pref[i]].first++;
+            mp[pref[i]].second = i+1;
+        }
+        
+        return {-1};
+    }
