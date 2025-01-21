@@ -1,0 +1,32 @@
+void removeLoop(Node* head) {
+        
+        // first detect cycle in linkedlist;
+        // floyd cycle detection
+        Node * slow = head;
+        Node * fast = head;
+        
+        while(fast != NULL && fast-> next != NULL) {
+            slow = slow-> next;
+            fast = fast-> next-> next;
+            if(slow == fast) break; // found a cycle;
+        }
+        
+        // if no loop so return;
+        if(fast == NULL || fast-> next == NULL) return;
+        
+        // step2 -> find Starting Now of Cycle
+        slow = head;
+        while(slow != fast) {
+            slow = slow-> next;
+            fast = fast-> next;
+        }
+        // now at this point we've found our starting cycle node;
+        // now step 3; 
+        // move fat pointer till you dont find fast-> next = slow;
+        while(fast-> next != slow) {
+            fast = fast-> next;
+        }
+        fast-> next = NULL;
+        return;
+    }
+    
