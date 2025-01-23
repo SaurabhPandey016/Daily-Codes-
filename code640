@@ -1,0 +1,32 @@
+Node* cloneLinkedList(Node* head) {
+        // Write your code here
+
+        // Got q in 12mins
+        // got soln in 25 mins
+        // suppose we have n nodes in original list
+        if (!head) return nullptr; 
+
+        unordered_map<Node*, Node*> nodeMap; 
+        Node* temp = head;
+
+        // lets first create next nodes in new list
+        Node* dummy = new Node(-1), *temp2 = dummy;
+        while (temp) {
+            Node* curr = new Node(temp->data);
+            nodeMap[temp] = curr; 
+            temp2->next = curr;
+            temp2 = curr;
+            temp = temp->next;
+        }
+
+        // now join random pointers
+        temp = head;
+        temp2 = dummy->next;
+        while (temp) {
+            temp2->random = (temp->random) ? nodeMap[temp->random] : nullptr;
+            temp = temp->next;
+            temp2 = temp2->next;
+        }
+
+        return dummy->next; 
+    }
