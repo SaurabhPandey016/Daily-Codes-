@@ -1,0 +1,13 @@
+class Node {
+    public:
+    int key, value;
+    Node *next;
+    Node *prev;
+    
+    Node(int _key, int _value) {
+        key = _key;
+        value = _value;
+        next = NULL;
+        prev = NULL;
+    }
+};
