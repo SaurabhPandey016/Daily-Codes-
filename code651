@@ -1,0 +1,27 @@
+int height(Node* node) {
+        // code here
+        if(node==NULL)
+        return 0;
+        int ans=0;
+        queue<Node*> qt;
+        qt.push(node);
+        while(!qt.empty())
+        {
+            
+            int size=qt.size();
+            while(size--){
+            Node *curr=qt.front();
+            qt.pop();
+             if(curr->left)
+             {
+                 qt.push(curr->left);
+             }
+             if(curr->right)
+             {
+                 qt.push(curr->right);
+             }
+            }
+            ans++;
+        }
+        return ans-1;
+    }
