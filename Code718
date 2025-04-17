@@ -1,0 +1,30 @@
+{
+        vector<set<Pair>> adj(V);
+
+        for (const auto& edge : edges) {
+            int u = edge[0], v = edge[1], w = edge[2];
+            adj[u].insert(Pair(v, w));
+            adj[v].insert(Pair(u, w));
+        }
+
+        int ans = INT_MAX;
+
+        for (const auto& edge : edges) {
+            int u = edge[0], v = edge[1], w = edge[2];
+
+            // Remove edge
+            adj[u].erase(Pair(v, w));
+            adj[v].erase(Pair(u, w));
+
+            int minDist = dijkstra(u, v, V, adj);
+            if (minDist != INT_MAX) {
+                ans = min(ans, minDist + w);
+            }
+
+            // Add edge back
+            adj[u].insert(Pair(v, w));
+            adj[v].insert(Pair(u, w));
+        }
+
+        return (ans == INT_MAX ? -1 : ans);
+    }
