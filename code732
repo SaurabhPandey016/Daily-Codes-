@@ -1,0 +1,27 @@
+nt findmax(vector<int> v,int s){
+        int maxi=s;
+        for(int i=s+1;i<v.size();i++){
+            if(v[i]>=v[maxi]){
+                maxi=i;
+            }
+        }
+        return maxi;
+    }
+    
+string findMaximumNum(string& s, int k) {
+    vector<int> v(s.size());
+    for(int i=0;i<s.size();i++){
+        v[i]=s[i]-'0';
+    }
+    for(int i=0;i<v.size() && k>0;i++){
+        int ind=findmax(v,i);
+        if(v[ind]>v[i] && ind!=i){
+            swap(v[ind],v[i]);k--;
+        }
+    }
+    string res="";
+    for(int i:v){
+        res+=to_string(i);
+    }
+    return res;
+}
