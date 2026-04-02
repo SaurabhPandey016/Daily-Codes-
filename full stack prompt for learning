@@ -1,0 +1,37 @@
+ok now i will give you the access of my entire codebase then you will tell me exactly what to prepare so that i can learn everything and have a string hold --> 
+
+medimeet backend codebase -> 
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-server/server.js, 
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-server/config/db.js, 
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-server/controllers/authController.js, 
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-server/middlewares/authMiddleware.js, 
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-server/models/User.js, 
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-server/models/Appointment.js, 
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-server/routes/appointmentRoutes.js, 
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-server/routes/authRoutes.js, 
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-server/routes/serviceRoutes.js, 
+
+--> these are the necessary and almost files of backend for Doctor-appointment app --
+
+Now frontend codebase of medimeet - doctor appointment app-> 
+
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-client/src/App.jsx, 
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-client/src/main.jsx, 
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-client/src/app/store.js, 
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-client/src/features/auth/authSlice.js, 
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-client/src/pages/Login.jsx, 
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-client/src/pages/BookAppointment.jsx, 
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-client/src/pages/Home.jsx, 
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-client/src/pages/MyAppointments.jsx, 
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-client/src/pages/MyProfile.jsx, 
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-client/src/pages/Services.jsx, 
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-client/src/pages/Signup.jsx. 
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-client/src/components/ProtectedRoute.jsx, 
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-client/src/lib/data.js, 
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-client/src/lib/specialities.js, 
+https://github.com/SaurabhPandey016/Doctor-appointment-app/blob/main/doctor-appointment-client/src/lib/utils.js, 
+
+now this is all about medimeet necessary codebase for frontend as well as backend , now make me so strong in this so that interviewer asks anything i will strongly answer it.
+
+
+
