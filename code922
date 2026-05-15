@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        
+        int n = nums.size();
+
+        // now we'll run binary search on it;
+        int s = 0, e = n-1;
+        int minEle = INT_MAX;
+        while(s <= e) {
+
+            int mid = ( s + e )/2;
+
+            // now we;ll figure out which part is sorted;
+            // if left part is sorted -> 
+            if( nums[s] <= nums[mid]) {
+                
+                // so we'll find the min into this [part and go the right part;
+            minEle = min(nums[s], minEle);
+            s = mid + 1;
+
+            // we go onto right part;
+
+            }
+            else {
+                // mean right [part is sorted --> 
+                minEle = min(minEle, nums[mid]);
+                e = mid - 1;
+            }
+
+        }
+
+        return minEle;
+    }
+};
